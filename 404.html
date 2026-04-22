@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Página não encontrada</title>
+    <meta name="robots" content="noindex, follow">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --panel: #1e293b;
+            --accent: #6b46c1;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: radial-gradient(circle at top, #1e293b, var(--bg));
+            color: var(--text);
+            padding: 1.5rem;
+        }
+        .card {
+            width: min(680px, 100%);
+            background: color-mix(in oklab, var(--panel) 92%, black);
+            border: 1px solid #334155;
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+            text-align: center;
+        }
+        h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); }
+        p { color: var(--muted); line-height: 1.6; }
+        .actions {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background: var(--accent);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        a.secondary {
+            background: transparent;
+            border: 1px solid #475569;
+            color: var(--text);
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <h1>404</h1>
+        <p>A página que tentou aceder não foi encontrada. O conteúdo pode ter sido movido ou removido.</p>
+        <div class="actions">
+            <a href="/">Voltar ao início</a>
+            <a class="secondary" href="/#contato">Falar com Eliseu</a>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,164 @@
+# ========================================
+# ELISEU SILVA TST - PORTFOLIO
+# Security & Performance Configuration
+# ========================================
+
+# -----------------------------------
+# 1. SEGURANÇA
+# -----------------------------------
+
+# Proteção contra clickjacking
+<IfModule mod_headers.c>
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    
+    # Content Security Policy (ajustar conforme necessário)
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://wa.me"
+</IfModule>
+
+# Desabilitar listagem de diretórios
+Options -Indexes
+
+# Bloquear acesso a arquivos sensíveis
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Proteger arquivos de configuração
+<Files ~ "^(\.htaccess|\.git|\.gitignore|composer\.json|package\.json|README\.md)$">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# -----------------------------------
+# 2. PERFORMANCE & CACHING
+# -----------------------------------
+
+# Habilitar compressão GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# Cache Control
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Imagens
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # Fontes
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    
+    # CSS e JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    
+    # HTML
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # Manifest e JSON
+    ExpiresByType application/manifest+json "access plus 1 week"
+    ExpiresByType application/json "access plus 1 day"
+</IfModule>
+
+# Cache Headers
+<IfModule mod_headers.c>
+    # Imagens e recursos estáticos
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+    </FilesMatch>
+    
+    # CSS e JavaScript
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+    
+    # HTML
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "max-age=3600, public, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+# -----------------------------------
+# 3. URL REWRITING & REDIRECTS
+# -----------------------------------
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Forçar HTTPS (descomentar quando SSL estiver configurado)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Remover www (ou adicionar www, conforme preferência)
+    # RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    # RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+    
+    # Remover trailing slash (excepto para diretórios)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [R=301,L]
+    
+    # Adicionar .html automaticamente (se index.html for a homepage)
+    # RewriteCond %{REQUEST_FILENAME} !-f
+    # RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteRule ^([^\.]+)$ $1.html [NC,L]
+</IfModule>
+
+# -----------------------------------
+# 4. OTIMIZAÇÕES ADICIONAIS
+# -----------------------------------
+
+# Desabilitar ETags (usar Cache-Control em vez)
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None
+
+# Limite de upload (ajustar conforme necessário)
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+
+# Timeout
+php_value max_execution_time 300
+
+# -----------------------------------
+# 5. PÁGINAS DE ERRO PERSONALIZADAS
+# -----------------------------------
+
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+ErrorDocument 403 /403.html
+
+# -----------------------------------
+# 6. MIME TYPES
+# -----------------------------------
+
+<IfModule mod_mime.c>
+    # Web fonts
+    AddType font/woff2 .woff2
+    AddType font/woff .woff
+    AddType font/ttf .ttf
+    
+    # Manifest
+    AddType application/manifest+json .webmanifest .json
+    
+    # Web App
+    AddType application/x-web-app-manifest+json .webapp
+</IfModule>
+
+# -----------------------------------
+# FIM DA CONFIGURAÇÃO
+# -----------------------------------

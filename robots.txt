@@ -1,0 +1,57 @@
+# robots.txt para Eliseu Silva TST - Assessoria e Consultoria SST
+# Última actualização: 2026-01-19
+
+# Permitir todos os robots de pesquisa
+User-agent: *
+Allow: /
+
+# URLs específicas para indexação prioritária
+Allow: /index.html
+Allow: /#servicos
+Allow: /#experiencia
+Allow: /#cases
+Allow: /#contato
+
+# Bloquear diretórios administrativos (se existirem)
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /private/
+Disallow: /.git/
+
+# Permitir recursos importantes
+Allow: /img/
+Allow: /css/
+Allow: /js/
+Allow: /manifest.json
+
+# Sitemap (quando criado)
+Sitemap: https://www.eliseusilvasts.com/sitemap.xml
+
+# Crawl-delay para evitar sobrecarga
+Crawl-delay: 1
+
+# Regras específicas para bots conhecidos
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Bloquear bots maliciosos conhecidos
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

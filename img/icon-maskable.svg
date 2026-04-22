@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Eliseu Silva Assessoria SST">
+  <rect width="512" height="512" fill="#111827"/>
+  <circle cx="256" cy="256" r="214" fill="#6B46C1"/>
+  <circle cx="256" cy="200" r="86" fill="#F8FAFC"/>
+  <rect x="146" y="300" width="220" height="112" rx="56" fill="#F8FAFC"/>
+  <text x="256" y="475" text-anchor="middle" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="700">SST</text>
+</svg>

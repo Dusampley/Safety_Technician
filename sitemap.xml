@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Página Principal -->
+    <url>
+        <loc>https://www.eliseusilvasts.com/</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://www.eliseusilvasts.com/img/EliseuPerfil6.png</image:loc>
+            <image:title>Eliseu Silva - Técnico de Segurança do Trabalho</image:title>
+            <image:caption>Assessoria especializada em SST com 18+ anos de experiência</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Seção Sobre -->
+    <url>
+        <loc>https://www.eliseusilvasts.com/#sobre</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Seção Serviços SST -->
+    <url>
+        <loc>https://www.eliseusilvasts.com/#servicos</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <!-- Seção Experiência -->
+    <url>
+        <loc>https://www.eliseusilvasts.com/#experiencia</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Seção Cases de Sucesso -->
+    <url>
+        <loc>https://www.eliseusilvasts.com/#cases</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Seção Depoimentos -->
+    <url>
+        <loc>https://www.eliseusilvasts.com/#depoimentos</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.75</priority>
+    </url>
+
+    <!-- Seção Parceria -->
+    <url>
+        <loc>https://www.eliseusilvasts.com/#parceria</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Seção Qualificações -->
+    <url>
+        <loc>https://www.eliseusilvasts.com/#qualificacoes</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>quarterly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Seção Contacto -->
+    <url>
+        <loc>https://www.eliseusilvasts.com/#contato</loc>
+        <lastmod>2026-01-19</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+</urlset>
