@@ -9,6 +9,8 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="Eliseu Silva">
     <meta name="theme-color" content="#6B46C1">
+    <link rel="canonical" href="https://www.eliseusilvasts.com/">
+    <link rel="alternate" hreflang="pt-PT" href="https://www.eliseusilvasts.com/">
     
     <!-- PWA / Manifest -->
     <link rel="manifest" href="/manifest.json">
@@ -43,7 +45,7 @@
     <meta name="twitter:image" content="img/EliseuPerfil6.png">
     <!-- LinkedIn -->
     <meta property="article:author" content="https://www.linkedin.com/in/eliseubs-tsst/">
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="img/icon-app.svg">
     <link rel="apple-touch-icon" href="img/EliseuPerfil6.png">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"></noscript>
@@ -745,6 +747,110 @@
             content: "…";
             font-size: 1.2em;
         }
+        /* Carrossel Tipo Fita de Filme */
+        .film-strip-carousel {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background: linear-gradient(to bottom, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+            padding: 3rem 0;
+            overflow: hidden;
+        }
+        .film-strip-container {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            animation: scrollFilmStrip 60s linear infinite;
+            width: max-content;
+            padding: 0 1rem;
+        }
+        .film-strip-container:hover {
+            animation-play-state: paused;
+        }
+        .film-strip-item {
+            flex-shrink: 0;
+            position: relative;
+            width: 280px;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border: 3px solid #6B46C1;
+            background: linear-gradient(135deg, #6B46C1 0%, #8B5CF6 100%);
+        }
+        .film-strip-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(107, 70, 193, 0.15);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .film-strip-item:hover::after {
+            opacity: 1;
+        }
+        .film-strip-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            z-index: 0;
+            transition: transform 0.3s ease;
+        }
+        .film-strip-item:hover img {
+            transform: scale(1.05);
+        }
+        @keyframes scrollFilmStrip {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        /* Duplicar items para loop contínuo */
+        .film-strip-container::after {
+            content: '';
+            flex-shrink: 0;
+            width: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .film-strip-carousel {
+                padding: 2rem 0;
+            }
+            .film-strip-item {
+                width: 200px;
+                height: 150px;
+                border: 2px solid #e2e8f0;
+            }
+            .film-strip-container {
+                gap: 1rem;
+                animation: scrollFilmStrip 50s linear infinite;
+            }
+        }
+        @media (max-width: 480px) {
+            .film-strip-item {
+                width: 160px;
+                height: 120px;
+                border: 1px solid #e2e8f0;
+            }
+            .film-strip-container {
+                gap: 0.75rem;
+                animation: scrollFilmStrip 45s linear infinite;
+            }
+            .film-strip-carousel {
+                padding: 1.5rem 0;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-textDark">
@@ -835,7 +941,7 @@
         <!-- Seção Sobre Mim -->
         <section id="sobre" class="py-20 md:py-28 bg-white relative">
             <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto">
+                <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-12">
                         <span class="inline-block px-4 py-2 bg-purple-100 rounded-full text-purple-600 text-sm font-semibold mb-4">
                             👨‍💼 SOBRE O PROFISSIONAL
@@ -843,8 +949,8 @@
                         <h2 class="text-4xl md:text-5xl font-bold text-primary mb-4">Quem é Eliseu Silva</h2>
                         <div class="w-24 h-1 bg-accent mx-auto rounded-full"></div>
                     </div>
-                <h2 class="text-4xl font-bold text-primary text-center mb-12">Sobre Mim: Expertise e Compromisso</h2>
-                <div class="max-w-4xl mx-auto text-lg leading-relaxed text-textDark">
+                <h3 class="text-3xl font-bold text-primary text-center mb-12">Sobre Mim: Expertise e Compromisso</h3>
+                <div class="max-w-6xl mx-auto text-lg leading-relaxed text-textDark px-4 md:px-12">
                     <p class="mb-6">
                         Com mais de 18 anos de trajetória consolidada como Técnico em Segurança do Trabalho, minha carreira é marcada por ampla vivência em ambientes de alto risco, abrangendo desde a rotina administrativa até a Supervisão estratégica em campo. Possuo experiência multifacetada em segmentos críticos como Geotecnia, Construção Civil, Indústria Naval, Montagem Industrial e Gasodutos, com especialização em automação de terminais e montagem elétrica.
                     </p>
@@ -854,6 +960,57 @@
                     <p>
                         Em constante busca por aprimoramento, minha formação superior em Análise e Desenvolvimento de Sistemas de Informação complementa minha visão sistêmica, permitindo-me integrar conhecimentos de tecnologia para otimizar processos e soluções em QSMS. Meu diferencial reside na capacidade de liderar e empreender, contribuindo ativamente para o sucesso dos projetos e a Segurança dos empreendimentos.
                     </p>
+                </div>
+                
+                <!-- Carrossel Tipo Fita de Filme -->
+                <div class="film-strip-carousel mt-16">
+                    <div class="film-strip-container" aria-label="Galeria de fotos profissionais em rotação contínua">
+                        <!-- Primeira sequência de fotos -->
+                        <div class="film-strip-item" role="img" aria-label="Foto 1 - Eliseu em destaque"><img src="img/EliseuEmDestaque/DSC_0043.JPG" alt="Eliseu Silva em ambiente profissional" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 2 - Eliseu em destaque"><img src="img/EliseuEmDestaque/DSC_0054_3.JPG" alt="Trabalho em segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 3 - Eliseu em destaque"><img src="img/EliseuEmDestaque/DSC_0084.JPG" alt="Supervisão de campo" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 4 - Eliseu em destaque"><img src="img/EliseuEmDestaque/DSC_0092.JPG" alt="Inspeção de segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 5 - Eliseu em destaque"><img src="img/EliseuEmDestaque/DSC_0096_2.JPG" alt="Análise de riscos" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 6 - Eliseu em destaque"><img src="img/EliseuEmDestaque/DSC_0099_2.JPG" alt="Orientação profissional" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 7 - Eliseu em destaque"><img src="img/EliseuEmDestaque/DSC_0106_2.JPG" alt="Formação em segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 8 - Eliseu em destaque"><img src="img/EliseuEmDestaque/DSC_0109.JPG" alt="Trabalho em equipe" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 9 - Eliseu em destaque"><img src="img/EliseuEmDestaque/DSC_0857.JPG" alt="Evento profissional" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 10 - Eliseu em destaque"><img src="img/EliseuEmDestaque/DSC_0897.JPG" alt="Consultoria em obra" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 11 - Eliseu em destaque"><img src="img/EliseuEmDestaque/DSC_0901.JPG" alt="Avaliação de segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 12 - Eliseu em destaque"><img src="img/EliseuEmDestaque/IMG_0002.jpg" alt="Treinamento de pessoal" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 13 - Eliseu em destaque"><img src="img/EliseuEmDestaque/IMG_20121024_165115.jpg" alt="Visita técnica" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 14 - Eliseu em destaque"><img src="img/EliseuEmDestaque/IMG_20130317_104233.jpg" alt="Reunião de segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 15 - Eliseu em destaque"><img src="img/EliseuEmDestaque/IMG_20130526_084926.jpg" alt="Inspeção de obra" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 16 - Eliseu em destaque"><img src="img/EliseuEmDestaque/IMG_20141206_153853.jpg" alt="Supervisão profissional" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 17 - Eliseu em destaque"><img src="img/EliseuEmDestaque/20140220_070511.jpg" alt="Ambiente de trabalho" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 18 - Eliseu em destaque"><img src="img/EliseuEmDestaque/20140917_070841.jpg" alt="Operação segura" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 19 - Eliseu em destaque"><img src="img/EliseuEmDestaque/20140918_071426.jpg" alt="Gestão de segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 20 - Eliseu em destaque"><img src="img/EliseuEmDestaque/20140919_070549.jpg" alt="Trabalho seguro" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 21 - Eliseu em destaque"><img src="img/EliseuEmDestaque/20150324_073329.jpg" alt="Projeto de segurança" loading="lazy"></div>
+                        
+                        <!-- Segunda sequência (duplicada para loop contínuo) -->
+                        <div class="film-strip-item" role="img" aria-label="Foto 1 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/DSC_0043.JPG" alt="Eliseu Silva em ambiente profissional" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 2 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/DSC_0054_3.JPG" alt="Trabalho em segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 3 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/DSC_0084.JPG" alt="Supervisão de campo" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 4 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/DSC_0092.JPG" alt="Inspeção de segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 5 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/DSC_0096_2.JPG" alt="Análise de riscos" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 6 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/DSC_0099_2.JPG" alt="Orientação profissional" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 7 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/DSC_0106_2.JPG" alt="Formação em segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 8 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/DSC_0109.JPG" alt="Trabalho em equipe" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 9 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/DSC_0857.JPG" alt="Evento profissional" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 10 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/DSC_0897.JPG" alt="Consultoria em obra" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 11 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/DSC_0901.JPG" alt="Avaliação de segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 12 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/IMG_0002.jpg" alt="Treinamento de pessoal" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 13 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/IMG_20121024_165115.jpg" alt="Visita técnica" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 14 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/IMG_20130317_104233.jpg" alt="Reunião de segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 15 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/IMG_20130526_084926.jpg" alt="Inspeção de obra" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 16 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/IMG_20141206_153853.jpg" alt="Supervisão profissional" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 17 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/20140220_070511.jpg" alt="Ambiente de trabalho" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 18 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/20140917_070841.jpg" alt="Operação segura" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 19 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/20140918_071426.jpg" alt="Gestão de segurança" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 20 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/20140919_070549.jpg" alt="Trabalho seguro" loading="lazy"></div>
+                        <div class="film-strip-item" role="img" aria-label="Foto 21 - Eliseu em destaque (repetição)"><img src="img/EliseuEmDestaque/20150324_073329.jpg" alt="Projeto de segurança" loading="lazy"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1033,7 +1190,7 @@
                             aria-expanded="false"
                             aria-controls="experience-paul-wurth">
                             <div class="flex items-center space-x-3">
-                                <img src="https://placehold.co/40x40/7C3AED/E2E8F0?text=PW" alt="Paul Wurth" class="w-12 h-12 rounded-full ring-2 ring-purple-200 group-hover:ring-purple-400 transition-all">
+                                <img src="img/logoMarcaEmpresas/logo-paulwurth.png" alt="Paul Wurth" class="w-12 h-12 rounded-full ring-2 ring-purple-200 group-hover:ring-purple-400 transition-all">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-sm text-primary group-hover:text-purple-600 transition-colors">Paul Wurth do Brasil</h4>
                                     <p class="text-xs text-gray-500">2020 - 2021</p>
@@ -1050,7 +1207,7 @@
                             aria-expanded="false"
                             aria-controls="experience-enseada">
                             <div class="flex items-center space-x-3">
-                                <img src="https://placehold.co/40x40/0891B2/E2E8F0?text=E" alt="Enseada" class="w-12 h-12 rounded-full ring-2 ring-cyan-200 group-hover:ring-cyan-400 transition-all">
+                                <img src="img/logoMarcaEmpresas/logo-enseada.png" alt="Enseada" class="w-12 h-12 rounded-full ring-2 ring-cyan-200 group-hover:ring-cyan-400 transition-all">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-sm text-primary group-hover:text-cyan-600 transition-colors">Enseada Indústria Naval</h4>
                                     <p class="text-xs text-gray-500">2013 - 2016</p>
@@ -1067,7 +1224,7 @@
                             aria-expanded="false"
                             aria-controls="experience-odebrecht">
                             <div class="flex items-center space-x-3">
-                                <img src="https://placehold.co/40x40/10B981/E2E8F0?text=O" alt="Odebrecht" class="w-12 h-12 rounded-full ring-2 ring-green-200 group-hover:ring-green-400 transition-all">
+                                <img src="img/logoMarcaEmpresas/logo-odebrecht.png" alt="Odebrecht" class="w-12 h-12 rounded-full ring-2 ring-green-200 group-hover:ring-green-400 transition-all">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-sm text-primary group-hover:text-green-600 transition-colors">Odebrecht Engenharia</h4>
                                     <p class="text-xs text-gray-500">2011 - 2013</p>
@@ -1084,7 +1241,7 @@
                             aria-expanded="false"
                             aria-controls="experience-contreras">
                             <div class="flex items-center space-x-3">
-                                <img src="https://placehold.co/40x40/3B82F6/E2E8F0?text=C" alt="Contreras" class="w-12 h-12 rounded-full ring-2 ring-blue-200 group-hover:ring-blue-400 transition-all">
+                                <img src="img/logoMarcaEmpresas/logo-contreras.png" alt="Contreras" class="w-12 h-12 rounded-full ring-2 ring-blue-200 group-hover:ring-blue-400 transition-all">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-sm text-primary group-hover:text-blue-600 transition-colors">Contreras Engenharia</h4>
                                     <p class="text-xs text-gray-500">2010 - 2011</p>
@@ -1101,7 +1258,7 @@
                             aria-expanded="false"
                             aria-controls="experience-galvao">
                             <div class="flex items-center space-x-3">
-                                <img src="https://placehold.co/40x40/F59E0B/E2E8F0?text=G" alt="Galvão" class="w-12 h-12 rounded-full ring-2 ring-amber-200 group-hover:ring-amber-400 transition-all">
+                                <img src="img/logoMarcaEmpresas/logo-galvao.png" alt="Galvão" class="w-12 h-12 rounded-full ring-2 ring-amber-200 group-hover:ring-amber-400 transition-all">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-sm text-primary group-hover:text-amber-600 transition-colors">Galvão Engenharia</h4>
                                     <p class="text-xs text-gray-500">2008 - 2010</p>
@@ -1118,7 +1275,7 @@
                             aria-expanded="false"
                             aria-controls="experience-carioca">
                             <div class="flex items-center space-x-3">
-                                <img src="https://placehold.co/40x40/6366F1/E2E8F0?text=CN" alt="Carioca" class="w-12 h-12 rounded-full ring-2 ring-indigo-200 group-hover:ring-indigo-400 transition-all">
+                                <img src="img/logoMarcaEmpresas/logo-carioca.png" alt="Carioca" class="w-12 h-12 rounded-full ring-2 ring-indigo-200 group-hover:ring-indigo-400 transition-all">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-sm text-primary group-hover:text-indigo-600 transition-colors">Carioca Christiani-Nielsen</h4>
                                     <p class="text-xs text-gray-500">2008</p>
@@ -1135,7 +1292,7 @@
                             aria-expanded="false"
                             aria-controls="experience-lavinon">
                             <div class="flex items-center space-x-3">
-                                <img src="https://placehold.co/40x40/3B82F6/E2E8F0?text=L" alt="LAVINON" class="w-12 h-12 rounded-full ring-2 ring-blue-200 group-hover:ring-blue-400 transition-all">
+                                <img src="img/logoMarcaEmpresas/logo-lavinon.png" alt="LAVINON" class="w-12 h-12 rounded-full ring-2 ring-blue-200 group-hover:ring-blue-400 transition-all">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-sm text-primary group-hover:text-blue-600 transition-colors">LAVINON Medicina</h4>
                                     <p class="text-xs text-gray-500">2007 - 2008</p>
@@ -1152,7 +1309,7 @@
                             aria-expanded="false"
                             aria-controls="experience-tecnosonda">
                             <div class="flex items-center space-x-3">
-                                <img src="https://placehold.co/40x40/14B8A6/E2E8F0?text=TS" alt="TECNOSONDA" class="w-12 h-12 rounded-full ring-2 ring-teal-200 group-hover:ring-teal-400 transition-all">
+                                <img src="img/logoMarcaEmpresas/logo-tecnosonda.png" alt="TECNOSONDA" class="w-12 h-12 rounded-full ring-2 ring-teal-200 group-hover:ring-teal-400 transition-all">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-sm text-primary group-hover:text-teal-600 transition-colors">TECNOSONDA</h4>
                                     <p class="text-xs text-gray-500">2006 - 2007</p>
@@ -1169,7 +1326,7 @@
                             aria-expanded="false"
                             aria-controls="experience-tenace">
                             <div class="flex items-center space-x-3">
-                                <img src="https://placehold.co/40x40/F43F5E/E2E8F0?text=TN" alt="TENACE" class="w-12 h-12 rounded-full ring-2 ring-rose-200 group-hover:ring-rose-400 transition-all">
+                                <img src="img/logoMarcaEmpresas/logo-tenace.png" alt="TENACE" class="w-12 h-12 rounded-full ring-2 ring-rose-200 group-hover:ring-rose-400 transition-all">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-sm text-primary group-hover:text-rose-600 transition-colors">TENACE Engenharia</h4>
                                     <p class="text-xs text-gray-500">2003 - 2006</p>
@@ -1186,7 +1343,7 @@
                             aria-expanded="false"
                             aria-controls="experience-alkance">
                             <div class="flex items-center space-x-3">
-                                <img src="https://placehold.co/40x40/10B981/E2E8F0?text=AK" alt="ALKANCE" class="w-12 h-12 rounded-full ring-2 ring-emerald-200 group-hover:ring-emerald-400 transition-all">
+                                <img src="img/logoMarcaEmpresas/logo-alkance.png" alt="ALKANCE" class="w-12 h-12 rounded-full ring-2 ring-emerald-200 group-hover:ring-emerald-400 transition-all">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-sm text-primary group-hover:text-emerald-600 transition-colors">ALKANCE</h4>
                                     <p class="text-xs text-gray-500">2003</p>
@@ -1203,7 +1360,7 @@
                             aria-expanded="false"
                             aria-controls="experience-parthenon">
                             <div class="flex items-center space-x-3">
-                                <img src="https://placehold.co/40x40/0EA5E9/E2E8F0?text=CP" alt="Parthenon" class="w-12 h-12 rounded-full ring-2 ring-sky-200 group-hover:ring-sky-400 transition-all">
+                                <img src="img/logoMarcaEmpresas/logo-clinicaparthenon.png" alt="Parthenon" class="w-12 h-12 rounded-full ring-2 ring-sky-200 group-hover:ring-sky-400 transition-all">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-sm text-primary group-hover:text-sky-600 transition-colors">Clínica Parthenon</h4>
                                     <p class="text-xs text-gray-500">1997 - 2002</p>
@@ -1226,7 +1383,7 @@
                                 <!-- Header da Empresa -->
                                 <div class="flex items-center mb-6 p-4 bg-white/70 rounded-lg border-l-4 border-purple-500 backdrop-blur-sm">
                                     <div class="flex items-center">
-                                        <img src="https://placehold.co/60x60/7C3AED/E2E8F0?text=PW" alt="Logomarca da Paul Wurth" class="w-14 h-14 mr-4 rounded-full ring-2 ring-purple-200">
+                                        <img src="img/logoMarcaEmpresas/logo-paulwurth.png" alt="Logomarca da Paul Wurth" class="w-14 h-14 mr-4 rounded-full ring-2 ring-purple-200">
                                         <div>
                                             <h3 class="text-2xl font-bold text-primary">Paul Wurth do Brasil</h3>
                                             <p class="text-accent text-lg font-semibold">Montagem e Manutenção Industrial (Multinacional)</p>
@@ -1318,15 +1475,15 @@
                                     <div class="photo-gallery">
                                         <div class="flex lg:flex-col space-x-4 lg:space-x-0 lg:space-y-4 w-max lg:w-full">
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/7C3AED/E2E8F0?text=Alto+Forno" alt="Alto Forno - Paul Wurth" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Alto Forno - Paul Wurth" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-purple-900/0 group-hover:bg-purple-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/DC2626/E2E8F0?text=Siderurgia" alt="Operação Siderúrgica" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Operação Siderúrgica" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-red-900/0 group-hover:bg-red-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/EA580C/E2E8F0?text=Mobilização" alt="Mobilização Industrial" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Mobilização Industrial" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-orange-900/0 group-hover:bg-orange-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                         </div>
@@ -1445,7 +1602,7 @@
                                 <!-- Header da Empresa -->
                                 <div class="flex items-center mb-6 p-4 bg-white/70 rounded-lg border-l-4 border-cyan-500 backdrop-blur-sm">
                                     <div class="flex items-center">
-                                        <img src="https://placehold.co/60x60/0891B2/E2E8F0?text=E" alt="Logomarca da Enseada" class="w-14 h-14 mr-4 rounded-full ring-2 ring-cyan-200">
+                                        <img src="img/logoMarcaEmpresas/logo-enseada.png" alt="Logomarca da Enseada" class="w-14 h-14 mr-4 rounded-full ring-2 ring-cyan-200">
                                         <div>
                                             <h3 class="text-2xl font-bold text-primary">Enseada Indústria Naval S.A (EEP)</h3>
                                             <p class="text-accent text-lg font-semibold">Indústria Naval (Grande Porte)</p>
@@ -1468,7 +1625,7 @@
                                     <!-- Supervisão Naval -->
                                     <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
                                         <h5 class="font-semibold text-blue-800 mb-3 flex items-center">
-                                            'š“ Supervisão e Operações Navais
+                                            Supervisão e Operações Navais
                                         </h5>
                                         <ul class="space-y-1 text-sm text-blue-700">
                                             <li>• <strong>Supervisão de Embarcações</strong> e atividades marítimas</li>
@@ -1699,7 +1856,7 @@
                                 <!-- Header da Empresa -->
                                 <div class="flex items-center mb-6 p-4 bg-white/70 rounded-lg border-l-4 border-green-500 backdrop-blur-sm">
                                     <div class="flex items-center">
-                                        <img src="https://placehold.co/60x60/059669/E2E8F0?text=O" alt="Logomarca da Odebrecht" class="w-14 h-14 mr-4 rounded-full ring-2 ring-green-200">
+                                        <img src="img/logoMarcaEmpresas/logo-odebrecht.png" alt="Logomarca da Odebrecht" class="w-14 h-14 mr-4 rounded-full ring-2 ring-green-200">
                                         <div>
                                             <h3 class="text-2xl font-bold text-primary">Odebrecht Engenharia e Construção</h3>
                                             <p class="text-accent text-lg font-semibold">Construção Civil e Montagem Industrial (Grande Porte)</p>
@@ -1791,15 +1948,15 @@
                                     <div class="photo-gallery">
                                         <div class="flex lg:flex-col space-x-4 lg:space-x-0 lg:space-y-4 w-max lg:w-full">
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/059669/E2E8F0?text=Construção" alt="Construção Civil Odebrecht" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Construção Civil Odebrecht" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-green-900/0 group-hover:bg-green-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/1D4ED8/E2E8F0?text=Montagem" alt="Montagem Industrial" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Montagem Industrial" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/EA580C/E2E8F0?text=Auditoria" alt="Auditoria de Segurança" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Auditoria de Segurança" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-orange-900/0 group-hover:bg-orange-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                         </div>
@@ -1915,7 +2072,7 @@
                                 <!-- Header da Empresa -->
                                 <div class="flex items-center mb-6 p-4 bg-white/70 rounded-lg border-l-4 border-blue-500 backdrop-blur-sm">
                                     <div class="flex items-center">
-                                        <img src="https://placehold.co/60x60/1E40AF/E2E8F0?text=C" alt="Logomarca da Contreras" class="w-14 h-14 mr-4 rounded-full ring-2 ring-blue-200">
+                                        <img src="img/logoMarcaEmpresas/logo-contreras.png" alt="Logomarca da Contreras" class="w-14 h-14 mr-4 rounded-full ring-2 ring-blue-200">
                                         <div>
                                             <h3 class="text-2xl font-bold text-primary">Contreras Engenharia e Construções</h3>
                                             <p class="text-accent text-lg font-semibold">Construção Civil e Montagem Industrial (Grande Porte)</p>
@@ -1963,7 +2120,7 @@
                                             🔍  Construção e inspeção de Dutos
                                         </h5>
                                         <ul class="space-y-1 text-sm text-orange-700">
-                                            <li>• <strong>escavaçío de Valas</strong> para infraestruturas subterrâneas</li>
+                                            <li>• <strong>escavação de Valas</strong> para infraestruturas subterrâneas</li>
                                             <li>• <strong>Soldagem de Dutos</strong> e montagem de componentes críticos</li>
                                             <li>• <strong>Perfuração Especializada</strong> (equipamentos de precisão)</li>
                                             <li>• <strong>Ensaios Não Destrutivos (END)</strong> - Gamagrafia</li>
@@ -2028,15 +2185,15 @@
                                     <div class="photo-gallery">
                                         <div class="flex lg:flex-col space-x-4 lg:space-x-0 lg:space-y-4 w-max lg:w-full">
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/1E40AF/E2E8F0?text=Gasoduto+Mauá" alt="Construção do Gasoduto Mauá-Gasan 2" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Construção do Gasoduto Mauá-Gasan 2" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/059669/E2E8F0?text=Desmonte+Rocha" alt="Operação de desmonte de rocha" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Operação de desmonte de rocha" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-green-900/0 group-hover:bg-green-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/DC2626/E2E8F0?text=Soldagem+Dutos" alt="Soldagem especializada de dutos" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Soldagem especializada de dutos" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-red-900/0 group-hover:bg-red-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                         </div>
@@ -2152,7 +2309,7 @@
                                 <!-- Header da Empresa -->
                                 <div class="flex items-center mb-6 p-4 bg-white/70 rounded-lg border-l-4 border-amber-500 backdrop-blur-sm">
                                     <div class="flex items-center">
-                                        <img src="https://placehold.co/60x60/D97706/E2E8F0?text=G" alt="Logomarca da Galvão" class="w-14 h-14 mr-4 rounded-full ring-2 ring-amber-200">
+                                        <img src="img/logoMarcaEmpresas/logo-galvao.png" alt="Logomarca da Galvão" class="w-14 h-14 mr-4 rounded-full ring-2 ring-amber-200">
                                         <div>
                                             <h3 class="text-2xl font-bold text-primary">Galvão Engenharia S/A</h3>
                                             <p class="text-accent text-lg font-semibold">Construção Civil e Montagem Industrial (Grande Porte)</p>
@@ -2162,7 +2319,7 @@
                                 <!-- Projeto Destaque -->
                                 <div class="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-400 mb-6">
                                     <h4 class="text-lg font-semibold text-amber-800 mb-2"> Projeto Principal</h4>
-                                    <p class="text-amber-700 font-medium">GíSDUC 3 (Cabiunas/Reduc) e GíSJAP (Japeri/Reduc)</p>
+                                    <p class="text-amber-700 font-medium">GASDUC 3 (Cabiunas/Reduc) e GASJAP (Japeri/Reduc)</p>
                                     <p class="text-sm text-amber-600">Rio de Janeiro | Cliente: Petrobras Transportes S.A.</p>
                                     <span class="inline-block mt-2 px-3 py-1 bg-amber-200 text-amber-800 rounded-full text-sm font-medium">Nov 2008 - Abr 2010 (1 ano e 6 meses)</span>
                                 </div>
@@ -2211,7 +2368,7 @@
                                     <!-- Ciclo Completo de Projeto -->
                                     <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg border-l-4 border-orange-500">
                                         <h5 class="font-semibold text-orange-800 mb-3">
-                                            🔍„ Ciclo Completo de Projeto
+                                            Ciclo Completo de Projeto
                                         </h5>
                                         <ul class="space-y-1 text-sm text-orange-700">
                                             <li>• <strong>Preparação de Canteiro</strong> - Supressão vegetal e terraplanagem</li>
@@ -2221,22 +2378,6 @@
                                         </ul>
                                     </div>
                                 </div>
-Conformidade e Fiscalização: Fiscalização rigorosa dos cumprimentos legais de Normas Regulamentadoras (NRs), NBRs e Procedimentos Corporativos vigentes e aplicáveis ao empreendimento.
-Condução de integração de novos colaboradores e organização de palestras e treinamentos para capacitação e adequação em mudanças de função.
-Realização de DDSMS (Diálogos Diários de Segurança, Meio Ambiente e Saúde) e abordagens orientativas em campo sobre a execução segura de tarefas.
-Realização de treinamentos práticos em campo para a rápida adequação aos procedimentos operacionais.
-Gestão da Qualidade: Levantamento de campos de não conformidades e anormalidades, promovendo a imediata ação corretiva e preventiva.
-Comunicação Estratégica: Participação ativa em reuniões quinzenais de QSMS (Quality, Safety, Health and Environment) para alinhamento estratégico e reporte de performance.
-2. Fiscalização e Risco Técnico (Rotina do Empreendimento)
-A atuação técnica cobre operações de alto risco e elevada complexidade, garantindo a execução conforme os planos de engenharia:
-A. Preparação de Canteiro e Fundações
-Movimentação: Acompanhamento de terraplanagem, transporte e movimentação de solo e materiais diversos, incluindo o dimensionamento de cabos e anilhas para levantamento de carga pesada.
-escavaçío: Fiscalização técnica da abertura de valas e condições de trabalho subterrâneo.
-B. Obras Civis e Construção de Dutos
-Operações Críticas: Supervisão de Trabalho em Altura e Trabalho em Espaço Confinado em toda a sua extensão.
-Técnicas Especializadas: Fiscalização da perfuração com uso de Boris Machine e acompanhamento dos trabalhos de Gamagrafia (Ensaios Não Destrutivos '“ END) para controle de qualidade.
-Limpeza e Conclusão: Acompanhamento da lavagem de duto com uso de PIG e bombas de alta pressão, e das etapas de inertização de dutos e gaseificação.
-Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo a entrega do projeto em conformidade ambiental.
                                     <!-- Destaque do Projeto -->
                                     <div class="bg-gradient-to-r from-amber-100 to-orange-100 p-5 rounded-lg shadow-md mb-6 border-l-4 border-amber-500">
                                         <h4 class="text-lg font-semibold text-primary mb-3 flex items-center">
@@ -2337,15 +2478,15 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                                     <div class="photo-gallery">
                                         <div class="flex lg:flex-col space-x-4 lg:space-x-0 lg:space-y-4 w-max lg:w-full">
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/D97706/E2E8F0?text=GíSDUC+3" alt="Gasoduto GíSDUC 3" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Gasoduto GASDUC 3" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-amber-900/0 group-hover:bg-amber-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/EAB308/E2E8F0?text=GíSJAP" alt="Gasoduto GíSJAP" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Gasoduto GASJAP" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-yellow-900/0 group-hover:bg-yellow-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/EA580C/E2E8F0?text=Gamagrafia" alt="Ensaios de Gamagrafia" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Ensaios de Gamagrafia" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-orange-900/0 group-hover:bg-orange-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                         </div>
@@ -2381,8 +2522,8 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                                         Projetos Executados
                                     </h4>
                                     <div class="space-y-3 text-sm text-gray-700">
-                                        <p><strong>GíSDUC 3:</strong> Cabiunas/Reduc</p>
-                                        <p><strong>GíSJAP:</strong> Japeri/Reduc</p>
+                                        <p><strong>GASDUC 3:</strong> Cabiunas/Reduc</p>
+                                        <p><strong>GASJAP:</strong> Japeri/Reduc</p>
                                         <p><strong>Cliente:</strong> Petrobras Transportes S.A.</p>
                                         <p><strong>Duração:</strong> 18 meses (Nov 2008 - Abr 2010)</p>
                                         <p><strong>Operações:</strong> Gamagrafia, movimentação de cargas pesadas</p>
@@ -2810,7 +2951,7 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                                 <!-- Header da Empresa -->
                                 <div class="flex items-center mb-6 p-4 bg-white/70 rounded-lg border-l-4 border-indigo-500 backdrop-blur-sm">
                                     <div class="flex items-center">
-                                        <img src="https://placehold.co/60x60/4338CA/E2E8F0?text=CN" alt="Logomarca da Carioca Christiani-Nielsen" class="w-14 h-14 mr-4 rounded-full ring-2 ring-indigo-200">
+                                        <img src="img/logoMarcaEmpresas/logo-carioca.png" alt="Logomarca da Carioca Christiani-Nielsen" class="w-14 h-14 mr-4 rounded-full ring-2 ring-indigo-200">
                                         <div>
                                             <h3 class="text-2xl font-bold text-primary">Carioca Christiani-Nielsen Engenharia</h3>
                                             <p class="text-accent text-lg font-semibold">Construção Civil Offshore (Grande Porte)</p>
@@ -2819,7 +2960,7 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                                 </div>
                                 <!-- Projeto Destaque -->
                                 <div class="bg-indigo-50 p-4 rounded-lg border-l-4 border-indigo-400 mb-6">
-                                    <h4 class="text-lg font-semibold text-indigo-800 mb-2">'š“ Projeto Principal</h4>
+                                    <h4 class="text-lg font-semibold text-indigo-800 mb-2">Projeto Principal</h4>
                                     <p class="text-indigo-700 font-medium">Terminal Flexível de GNL da Baía de Guanabara</p>
                                     <p class="text-sm text-indigo-600">Rio de Janeiro | Cliente: Petrobras Transportes S.A.</p>
                                     <span class="inline-block mt-2 px-3 py-1 bg-indigo-200 text-indigo-800 rounded-full text-sm font-medium">Jan 2008 - Nov 2008 (11 meses)</span>
@@ -2873,9 +3014,9 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                                 <h4 class="text-lg font-semibold text-primary mb-4">Fotos do Projeto</h4>
                                 <div class="photo-gallery bg-gray-100 rounded-lg p-2">
                                     <div class="flex lg:flex-col space-x-4 lg:space-x-0 lg:space-y-4 w-max lg:w-full">
-                                        <img src="https://placehold.co/300x200/4A5B7B/E2E8F0?text=Projeto+CN+1" alt="Foto do projeto Carioca Christiani-Nielsen 1" class="rounded-lg shadow-md flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-transform duration-200 hover:scale-105" loading="lazy">
-                                        <img src="https://placehold.co/300x200/4A5B7B/E2E8F0?text=Projeto+CN+2" alt="Foto do projeto Carioca Christiani-Nielsen 2" class="rounded-lg shadow-md flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-transform duration-200 hover:scale-105" loading="lazy">
-                                        <img src="https://placehold.co/300x200/4A5B7B/E2E8F0?text=Projeto+CN+3" alt="Foto do projeto Carioca Christiani-Nielsen 3" class="rounded-lg shadow-md flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-transform duration-200 hover:scale-105" loading="lazy">
+                                        <img src="img/fotoCapa.jpg" alt="Foto do projeto Carioca Christiani-Nielsen 1" class="rounded-lg shadow-md flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-transform duration-200 hover:scale-105" loading="lazy">
+                                        <img src="img/fotoCapa.jpg" alt="Foto do projeto Carioca Christiani-Nielsen 2" class="rounded-lg shadow-md flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-transform duration-200 hover:scale-105" loading="lazy">
+                                        <img src="img/fotoCapa.jpg" alt="Foto do projeto Carioca Christiani-Nielsen 3" class="rounded-lg shadow-md flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-transform duration-200 hover:scale-105" loading="lazy">
                                     </div>
                                 </div>
                             </div>
@@ -2987,7 +3128,7 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                                 <!-- Header da Empresa -->
                                 <div class="flex items-center mb-6 p-4 bg-white/70 rounded-lg border-l-4 border-blue-500 backdrop-blur-sm">
                                     <div class="flex items-center">
-                                        <img src="https://placehold.co/60x60/1E40AF/E2E8F0?text=L" alt="Logomarca da LAVINON" class="w-14 h-14 mr-4 rounded-full ring-2 ring-blue-200">
+                                        <img src="img/logoMarcaEmpresas/logo-lavinon.png" alt="Logomarca da LAVINON" class="w-14 h-14 mr-4 rounded-full ring-2 ring-blue-200">
                                         <div>
                                             <h3 class="text-2xl font-bold text-primary">LAVINON Medicina e Segurança do Trabalho Ltda</h3>
                                             <p class="text-accent text-lg font-semibold">Assessoria Ocupacional (Microempresa)</p>
@@ -3079,15 +3220,15 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                                     <div class="photo-gallery">
                                         <div class="flex lg:flex-col space-x-4 lg:space-x-0 lg:space-y-4 w-max lg:w-full">
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/1E40AF/E2E8F0?text=AmBev+Vidros" alt="Fábrica AmBev Vidros" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Fábrica AmBev Vidros" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/2563EB/E2E8F0?text=Medicina+Trabalho" alt="Medicina do Trabalho" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Medicina do Trabalho" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                             <div class="relative group">
-                                                <img src="https://placehold.co/300x200/1D4ED8/E2E8F0?text=Segurança+Industrial" alt="Segurança Industrial" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
+                                                <img src="img/fotoCapa.jpg" alt="Segurança Industrial" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
                                                 <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300 rounded-lg"></div>
                                             </div>
                                         </div>
@@ -3198,7 +3339,7 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                         <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-teal-100 to-transparent rounded-full opacity-30 -translate-y-16 translate-x-16"></div>
                         <div class="relative z-10">
                             <div class="flex items-center mb-6 p-4 bg-white/70 rounded-lg border-l-4 border-teal-500 backdrop-blur-sm">
-                                <img src="https://placehold.co/60x60/14B8A6/E2E8F0?text=TS" alt="TECNOSONDA" class="w-14 h-14 mr-4 rounded-full ring-2 ring-teal-200">
+                                <img src="img/logoMarcaEmpresas/logo-tecnosonda.png" alt="TECNOSONDA" class="w-14 h-14 mr-4 rounded-full ring-2 ring-teal-200">
                                 <div>
                                     <h3 class="text-2xl font-bold text-primary">TECNOSONDA S/A</h3>
                                     <p class="text-accent text-lg font-semibold">Geotecnia (Grande Porte)</p>
@@ -3301,7 +3442,7 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                         <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-rose-100 to-transparent rounded-full opacity-30 -translate-y-16 translate-x-16"></div>
                         <div class="relative z-10">
                             <div class="flex items-center mb-6 p-4 bg-white/70 rounded-lg border-l-4 border-rose-500 backdrop-blur-sm">
-                                <img src="https://placehold.co/60x60/F43F5E/E2E8F0?text=TN" alt="TENACE" class="w-14 h-14 mr-4 rounded-full ring-2 ring-rose-200">
+                                <img src="img/logoMarcaEmpresas/logo-tenace.png" alt="TENACE" class="w-14 h-14 mr-4 rounded-full ring-2 ring-rose-200">
                                 <div>
                                     <h3 class="text-2xl font-bold text-primary">TENACE Engenharia e Consultoria Ltda.</h3>
                                     <p class="text-accent text-lg font-semibold">Empresa de Médio Porte no Segmento de Montagem Industrial</p>
@@ -3428,7 +3569,7 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                                 </h4>
                                 
                                 <div class="mb-4">
-                                    <h5 class="font-semibold text-rose-800 mb-2">🔍„ Rotina Laboral:</h5>
+                                    <h5 class="font-semibold text-rose-800 mb-2">Rotina Laboral:</h5>
                                     <div class="text-gray-800 space-y-1.5 text-sm ml-4" role="list">
                                         <p role="listitem">• Noção de toda rotina Petrobrás/DRT/Civil (Diretrizes/Norma Regulamentadora/NBR)</p>
                                         <p role="listitem">• CAI, registro do SESMT, instalação e posse de CIPA</p>
@@ -3456,7 +3597,7 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                                 <div>
                                     <h5 class="font-semibold text-rose-800 mb-2"> Rotina do Empreendimento:</h5>
                                     <p class="text-sm text-gray-800 ml-4">
-                                        Atividades de instalação e montagem elétrica e instrumentação incluindo: escavaçío, montagem de subestaçío, eletrodutos, chave eólica, detectores de gases, squinpoiter, fler, forno industrial e outros serviços.
+                                        Atividades de instalação e montagem elétrica e instrumentação incluindo: escavação, montagem de subestação, eletrodutos, chave eólica, detectores de gases, squinpoiter, fler, forno industrial e outros serviços.
                                     </p>
                                 </div>
                             </div>
@@ -3532,7 +3673,7 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                         <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-100 to-transparent rounded-full opacity-30 -translate-y-16 translate-x-16"></div>
                         <div class="relative z-10">
                             <div class="flex items-center mb-6 p-4 bg-white/70 rounded-lg border-l-4 border-emerald-500 backdrop-blur-sm">
-                                <img src="https://placehold.co/60x60/10B981/E2E8F0?text=AK" alt="ALKANCE" class="w-14 h-14 mr-4 rounded-full ring-2 ring-emerald-200">
+                                <img src="img/logoMarcaEmpresas/logo-alkance.png" alt="ALKANCE" class="w-14 h-14 mr-4 rounded-full ring-2 ring-emerald-200">
                                 <div>
                                     <h3 class="text-2xl font-bold text-primary">ALKANCE Medicina e Segurança do Trabalho Ltda.</h3>
                                     <p class="text-accent text-lg font-semibold">Consultoria e Assessoria Ocupacional (Microempresa)</p>
@@ -3618,7 +3759,7 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                         <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-sky-100 to-transparent rounded-full opacity-30 -translate-y-16 translate-x-16"></div>
                         <div class="relative z-10">
                             <div class="flex items-center mb-6 p-4 bg-white/70 rounded-lg border-l-4 border-sky-500 backdrop-blur-sm">
-                                <img src="https://placehold.co/60x60/0EA5E9/E2E8F0?text=CP" alt="Parthenon" class="w-14 h-14 mr-4 rounded-full ring-2 ring-sky-200">
+                                <img src="img/logoMarcaEmpresas/logo-clinicaparthenon.png" alt="Parthenon" class="w-14 h-14 mr-4 rounded-full ring-2 ring-sky-200">
                                 <div>
                                     <h3 class="text-2xl font-bold text-primary">CLíNICA PARTHENON</h3>
                                     <p class="text-accent text-lg font-semibold">Clínica de Saúde Ocupacional (Microempresa)</p>
