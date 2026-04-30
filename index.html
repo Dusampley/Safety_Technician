@@ -324,6 +324,121 @@
             white-space: nowrap;
             scroll-behavior: smooth;
         }
+        .scenario-carousel {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+        .scenario-carousel-track {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .scenario-carousel-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.05);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+            pointer-events: none;
+        }
+        .scenario-carousel-slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        .scenario-carousel-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(17, 24, 39, 0.55), rgba(17, 24, 39, 0.05));
+            pointer-events: none;
+        }
+        .scenario-carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2.25rem;
+            height: 2.25rem;
+            border: none;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.85);
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 20;
+        }
+        .scenario-carousel-nav:hover {
+            background: #ffffff;
+            transform: translateY(-50%) scale(1.05);
+        }
+        .scenario-carousel-nav.prev {
+            left: 0.75rem;
+        }
+        .scenario-carousel-nav.next {
+            right: 0.75rem;
+        }
+        .scenario-carousel-dots {
+            position: absolute;
+            left: 50%;
+            bottom: 0.75rem;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.4rem;
+            z-index: 20;
+        }
+        .scenario-carousel-dot {
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.35);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .scenario-carousel-dot.active {
+            background: #ffffff;
+            transform: scale(1.15);
+        }
+        /* Carrossel Galeria Naval - fotos sem corte */
+        #embarcacao-carousel {
+            background: #0f172a;
+        }
+        #embarcacao-carousel .scenario-carousel-slide {
+            object-fit: contain;
+            background: #0f172a;
+            transform: scale(1);
+        }
+        #embarcacao-carousel .scenario-carousel-slide.active {
+            transform: scale(1);
+        }
+        /* Fundo desfocado da foto ativa */
+        #embarcacao-carousel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: var(--emb-bg);
+            background-size: cover;
+            background-position: center;
+            filter: blur(18px) brightness(0.35);
+            transform: scale(1.1);
+            z-index: 0;
+            transition: background-image 0.45s ease;
+        }
+        #embarcacao-carousel .scenario-carousel-track,
+        #embarcacao-carousel .scenario-carousel-overlay,
+        #embarcacao-carousel .scenario-carousel-nav,
+        #embarcacao-carousel .scenario-carousel-dots,
+        #embarcacao-carousel > div[class*='absolute'] {
+            z-index: 1;
+        }
         /* Forçar scroll horizontal quando necessário */
         .photo-gallery .photo-container {
             display: flex;
@@ -1419,21 +1534,60 @@
                                     <h4 class="text-lg font-semibold text-primary mb-4 flex items-center">
                                         🖼️ Galeria Naval
                                     </h4>
-                                    <div class="photo-gallery">
-                                        <div class="flex lg:flex-col space-x-4 lg:space-x-0 lg:space-y-4 w-max lg:w-full">
-                                            <div class="relative group">
-                                                <img src="https://placehold.co/300x200/0891B2/E2E8F0?text=Estaleiro" alt="Estaleiro Naval Enseada" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
-                                                <div class="absolute inset-0 bg-cyan-900/0 group-hover:bg-cyan-900/20 transition-colors duration-300 rounded-lg"></div>
-                                            </div>
-                                            <div class="relative group">
-                                                <img src="https://placehold.co/300x200/1D4ED8/E2E8F0?text=Embarcação" alt="Construção de Embarcação" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
-                                                <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-colors duration-300 rounded-lg"></div>
-                                            </div>
-                                            <div class="relative group">
-                                                <img src="https://placehold.co/300x200/DC2626/E2E8F0?text=Hidrojato" alt="Operação de Hidrojateamento" class="rounded-lg shadow-lg flex-shrink-0 w-64 h-48 lg:w-full object-cover transition-all duration-300 hover:scale-105 hover:shadow-xl" loading="lazy">
-                                                <div class="absolute inset-0 bg-red-900/0 group-hover:bg-red-900/20 transition-colors duration-300 rounded-lg"></div>
-                                            </div>
+                                    <!-- Foto de Destaque -->
+                                    <div class="mb-4 rounded-xl overflow-hidden border border-cyan-200 shadow-md bg-slate-900">
+                                        <div class="px-3 py-2 bg-gradient-to-r from-cyan-600 to-blue-700 text-white text-xs font-semibold uppercase tracking-wide">
+                                            Foto de Destaque
                                         </div>
+                                        <img src="img/DestaqueEnseada/20141006_112735.jpg" alt="Imagem de identidade do projeto naval na Enseada" class="w-full h-64 object-contain bg-slate-900" loading="lazy">
+                                        <div class="px-3 py-2 text-xs text-cyan-800 bg-cyan-50 border-t border-cyan-100">
+                                            Imagem identidade do projeto Enseada Indústria Naval.
+                                        </div>
+                                    </div>
+                                    <!-- Carrossel Embarcação Naval -->
+                                    <div id="embarcacao-carousel" class="scenario-carousel rounded-xl overflow-hidden" style="height:320px;">
+                                        <div class="scenario-carousel-track">
+                                            <img src="img/Embarcacao/20140517_131816.jpg"    alt="Embarcação Naval 1"  class="scenario-carousel-slide active" loading="lazy">
+                                            <img src="img/Embarcacao/20140801_081637.jpg"    alt="Embarcação Naval 2"  class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/20140910_123322.jpg"    alt="Embarcação Naval 3"  class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/20141031_192002.jpg"    alt="Embarcação Naval 4"  class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/20141218_164359.jpg"    alt="Embarcação Naval 5"  class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/20150204_150920.jpg"    alt="Embarcação Naval 6"  class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/20150220_080441.jpg"    alt="Embarcação Naval 7"  class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0059_4.JPG"         alt="Embarcação Naval 8"  class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0062_3.JPG"         alt="Embarcação Naval 9"  class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0083.JPG"           alt="Embarcação Naval 10" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0092.JPG"           alt="Embarcação Naval 11" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0094.JPG"           alt="Embarcação Naval 12" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0094_3.JPG"         alt="Embarcação Naval 13" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0114.JPG"           alt="Embarcação Naval 14" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0136.JPG"           alt="Embarcação Naval 15" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0192.JPG"           alt="Embarcação Naval 16" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0203.JPG"           alt="Embarcação Naval 17" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0726.JPG"           alt="Embarcação Naval 18" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0897.JPG"           alt="Embarcação Naval 19" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0935.JPG"           alt="Embarcação Naval 20" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_0938.JPG"           alt="Embarcação Naval 21" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_1565.JPG"           alt="Embarcação Naval 22" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_1778.JPG"           alt="Embarcação Naval 23" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_1847.JPG"           alt="Embarcação Naval 24" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_2071.JPG"           alt="Embarcação Naval 25" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/DSC_2292.JPG"           alt="Embarcação Naval 26" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/EliseuPerfil5 (1).JPG"  alt="Embarcação Naval 27" class="scenario-carousel-slide" loading="lazy">
+                                            <img src="img/Embarcacao/IMG_20141114_104222.jpg" alt="Embarcação Naval 28" class="scenario-carousel-slide" loading="lazy">
+                                        </div>
+                                        <div class="scenario-carousel-overlay"></div>
+                                        <!-- Contador -->
+                                        <div class="absolute top-2 right-3 bg-black/50 text-white text-xs font-semibold px-2 py-1 rounded-full z-20 select-none">
+                                            <span id="embarcacao-idx">1</span>&nbsp;/&nbsp;28
+                                        </div>
+                                        <!-- Barra de progresso -->
+                                        <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-20">
+                                            <div id="embarcacao-progress" class="h-full bg-cyan-400 transition-all duration-300" style="width:3.57%"></div>
+                                        </div>
+                                        <!-- Botões de navegação -->
+                                        <button class="scenario-carousel-nav prev" onclick="embarcacaoMove(-1)" aria-label="Foto anterior">&#8249;</button>
+                                        <button class="scenario-carousel-nav next" onclick="embarcacaoMove(1)"  aria-label="Próxima foto">&#8250;</button>
                                     </div>
                                 </div>
                             </div>
@@ -2444,6 +2598,55 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                             }
                         }
                         
+                        /**
+                         * Carrossel da Galeria Naval - Embarcação (28 fotos)
+                         */
+                        (function () {
+                            var _idx = 0;
+                            var _total = 28;
+                            var _timer = null;
+
+                            function _show(n) {
+                                var carousel = document.getElementById('embarcacao-carousel');
+                                if (!carousel) return;
+                                var slides = carousel.querySelectorAll('.scenario-carousel-slide');
+                                _idx = ((n % _total) + _total) % _total;
+                                slides.forEach(function (s, i) {
+                                    s.classList.toggle('active', i === _idx);
+                                });
+                                // Atualiza fundo desfocado
+                                var activeSrc = slides[_idx] ? slides[_idx].getAttribute('src') : '';
+                                if (activeSrc) {
+                                    carousel.style.setProperty('--emb-bg', 'url("' + activeSrc + '")');
+                                }
+                                var counter = document.getElementById('embarcacao-idx');
+                                if (counter) counter.textContent = _idx + 1;
+                                var bar = document.getElementById('embarcacao-progress');
+                                if (bar) bar.style.width = ((_idx + 1) / _total * 100).toFixed(2) + '%';
+                            }
+
+                            window.embarcacaoMove = function (dir) {
+                                _show(_idx + dir);
+                                _restartAuto();
+                            };
+
+                            function _restartAuto() {
+                                clearInterval(_timer);
+                                _timer = setInterval(function () { _show(_idx + 1); }, 4000);
+                            }
+
+                            document.addEventListener('DOMContentLoaded', function () {
+                                // Define fundo inicial
+                                var carousel = document.getElementById('embarcacao-carousel');
+                                if (carousel) {
+                                    var first = carousel.querySelector('.scenario-carousel-slide');
+                                    if (first) carousel.style.setProperty('--emb-bg', 'url("' + first.getAttribute('src') + '")');
+                                }
+                                _show(0);
+                                _restartAuto();
+                            });
+                        }());
+
                         /**
                          * Função legada para compatibilidade com botões "Mais Informações"
                          */
@@ -3524,13 +3727,23 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                     <article class="group bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
                         <!-- Galeria de Fotos do Cenário -->
                         <div class="relative h-64 overflow-hidden bg-gradient-to-br from-blue-900 to-blue-700">
-                            <!-- Placeholder para fotos - substituir por fotos reais -->
-                            <div class="absolute inset-0 flex items-center justify-center text-white text-center p-6">
-                                <div>
-                                    <svg class="w-20 h-20 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-                                    </svg>
-                                    <p class="text-sm opacity-75">Adicionar fotos:<br/>Entrada em espaço confinado</p>
+                            <div class="scenario-carousel" data-carousel="espaco-confinado" aria-label="Carrossel de supervisão em espaço confinado">
+                                <div class="scenario-carousel-track">
+                                    <img src="img/espacoConfinado/20141218_162513.jpg" alt="Supervisão de acesso em espaço confinado com controle de entrada" class="scenario-carousel-slide active" loading="lazy">
+                                    <img src="img/espacoConfinado/20141218_164359.jpg" alt="Acompanhamento de equipe em compartimento confinado" class="scenario-carousel-slide" loading="lazy">
+                                    <img src="img/espacoConfinado/20150204_150940.jpg" alt="Verificação de procedimentos de segurança para espaço confinado" class="scenario-carousel-slide" loading="lazy">
+                                    <img src="img/espacoConfinado/20150204_151322.jpg" alt="Inspeção operacional com monitorização em área confinada" class="scenario-carousel-slide" loading="lazy">
+                                    <img src="img/espacoConfinado/IMG_20210801_145038201.jpg" alt="Fiscalização técnica em operação crítica de espaço confinado" class="scenario-carousel-slide" loading="lazy">
+                                </div>
+                                <div class="scenario-carousel-overlay" aria-hidden="true"></div>
+                                <button class="scenario-carousel-nav prev" type="button" data-carousel-prev aria-label="Foto anterior">&#10094;</button>
+                                <button class="scenario-carousel-nav next" type="button" data-carousel-next aria-label="Próxima foto">&#10095;</button>
+                                <div class="scenario-carousel-dots">
+                                    <button class="scenario-carousel-dot active" type="button" data-carousel-dot data-index="0" aria-label="Ir para foto 1"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="1" aria-label="Ir para foto 2"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="2" aria-label="Ir para foto 3"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="3" aria-label="Ir para foto 4"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="4" aria-label="Ir para foto 5"></button>
                                 </div>
                             </div>
                             <!-- Badge de Risco -->
@@ -3591,12 +3804,23 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                     <article class="group bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
                         <!-- Galeria de Fotos do Cenário -->
                         <div class="relative h-64 overflow-hidden bg-gradient-to-br from-orange-900 to-red-700">
-                            <div class="absolute inset-0 flex items-center justify-center text-white text-center p-6">
-                                <div>
-                                    <svg class="w-20 h-20 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                                    </svg>
-                                    <p class="text-sm opacity-75">Adicionar fotos:<br/>Inspeção EPIs hidrojateamento</p>
+                            <div class="scenario-carousel" data-carousel="hidrojateamento" aria-label="Carrossel de inspeção de EPIs no hidrojateamento">
+                                <div class="scenario-carousel-track">
+                                    <img src="img/hidrojateamento/20141029_174230.jpg" alt="Inspeção de EPIs para operação de hidrojateamento" class="scenario-carousel-slide active" loading="lazy">
+                                    <img src="img/hidrojateamento/20141119_135634.jpg" alt="Verificação técnica de vestimentas de proteção para alta pressão" class="scenario-carousel-slide" loading="lazy">
+                                    <img src="img/hidrojateamento/DSC_0048.JPG" alt="Supervisão de equipe com equipamentos de proteção completos" class="scenario-carousel-slide" loading="lazy">
+                                    <img src="img/hidrojateamento/DSC_0053.JPG" alt="Fiscalização em área de hidrojateamento com isolamento operacional" class="scenario-carousel-slide" loading="lazy">
+                                    <img src="img/hidrojateamento/DSC_0090.JPG" alt="Auditoria de segurança em atividade crítica de hidrojato" class="scenario-carousel-slide" loading="lazy">
+                                </div>
+                                <div class="scenario-carousel-overlay" aria-hidden="true"></div>
+                                <button class="scenario-carousel-nav prev" type="button" data-carousel-prev aria-label="Foto anterior">&#10094;</button>
+                                <button class="scenario-carousel-nav next" type="button" data-carousel-next aria-label="Próxima foto">&#10095;</button>
+                                <div class="scenario-carousel-dots">
+                                    <button class="scenario-carousel-dot active" type="button" data-carousel-dot data-index="0" aria-label="Ir para foto 1"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="1" aria-label="Ir para foto 2"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="2" aria-label="Ir para foto 3"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="3" aria-label="Ir para foto 4"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="4" aria-label="Ir para foto 5"></button>
                                 </div>
                             </div>
                             <div class="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold">
@@ -3607,7 +3831,7 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                         <div class="p-6">
                             <div class="mb-4">
                                 <h3 class="text-2xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
-                                    Inspeção de EPIs - Hidrojateamento
+                                    Inspeção - Hidrojateamento
                                 </h3>
                                 <p class="text-sm text-gray-500 flex items-center gap-2">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -3769,12 +3993,23 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                     <!-- Cenário 5: Movimentação de Cargas -->
                     <article class="group bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
                         <div class="relative h-64 overflow-hidden bg-gradient-to-br from-amber-900 to-yellow-700">
-                            <div class="absolute inset-0 flex items-center justify-center text-white text-center p-6">
-                                <div>
-                                    <svg class="w-20 h-20 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
-                                    </svg>
-                                    <p class="text-sm opacity-75">Adicionar fotos:<br/>Içamento de cargas pesadas</p>
+                            <div class="scenario-carousel" data-carousel="movimentacao-cargas" aria-label="Carrossel de movimentação de cargas">
+                                <div class="scenario-carousel-track">
+                                    <img src="img/movimentacaoCarga/20140801_081631.jpg" alt="Supervisão de operação de içamento em área industrial" class="scenario-carousel-slide active" loading="lazy">
+                                    <img src="img/movimentacaoCarga/20140902_175710.jpg" alt="Movimentação de carga com sinalização e área isolada" class="scenario-carousel-slide" loading="lazy">
+                                    <img src="img/movimentacaoCarga/20140906_105607.jpg" alt="Operação com equipamento de elevação sob controlo de segurança" class="scenario-carousel-slide" loading="lazy">
+                                    <img src="img/movimentacaoCarga/IMG_20130708_102413-COLLAGE.jpg" alt="Atividade de movimentação de cargas com equipe operacional" class="scenario-carousel-slide" loading="lazy">
+                                    <img src="img/movimentacaoCarga/IMG_20210714_152328257_HDR.jpg" alt="Inspeção de operação de carga em ambiente de alto risco" class="scenario-carousel-slide" loading="lazy">
+                                </div>
+                                <div class="scenario-carousel-overlay" aria-hidden="true"></div>
+                                <button class="scenario-carousel-nav prev" type="button" data-carousel-prev aria-label="Foto anterior">&#10094;</button>
+                                <button class="scenario-carousel-nav next" type="button" data-carousel-next aria-label="Próxima foto">&#10095;</button>
+                                <div class="scenario-carousel-dots">
+                                    <button class="scenario-carousel-dot active" type="button" data-carousel-dot data-index="0" aria-label="Ir para foto 1"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="1" aria-label="Ir para foto 2"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="2" aria-label="Ir para foto 3"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="3" aria-label="Ir para foto 4"></button>
+                                    <button class="scenario-carousel-dot" type="button" data-carousel-dot data-index="4" aria-label="Ir para foto 5"></button>
                                 </div>
                             </div>
                             <div class="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold">
@@ -3791,7 +4026,7 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                                     </svg>
-                                    Galvão / Paul Wurth | 2008-2021
+                                    Enseada / Paul Wurth | 2008-2021
                                 </p>
                             </div>
                             
@@ -4940,6 +5175,78 @@ Reabilitação: Fiscalização da recomposição vegetal e mecânica, garantindo
                 img.addEventListener('load', () => {
                     img.classList.remove('img-loading');
                 });
+            });
+            // Carrossel do card de movimentação de cargas
+            const scenarioCarousels = document.querySelectorAll('[data-carousel]');
+            scenarioCarousels.forEach((carousel) => {
+                const slides = carousel.querySelectorAll('.scenario-carousel-slide');
+                const dots = carousel.querySelectorAll('[data-carousel-dot]');
+                const prevButton = carousel.querySelector('[data-carousel-prev]');
+                const nextButton = carousel.querySelector('[data-carousel-next]');
+                if (!slides.length) return;
+
+                let currentIndex = 0;
+                let autoplayId = null;
+
+                const renderSlide = (index) => {
+                    slides.forEach((slide, slideIndex) => {
+                        slide.classList.toggle('active', slideIndex === index);
+                    });
+                    dots.forEach((dot, dotIndex) => {
+                        dot.classList.toggle('active', dotIndex === index);
+                    });
+                };
+
+                const goToSlide = (index) => {
+                    currentIndex = (index + slides.length) % slides.length;
+                    renderSlide(currentIndex);
+                };
+
+                const startAutoplay = () => {
+                    stopAutoplay();
+                    autoplayId = window.setInterval(() => {
+                        goToSlide(currentIndex + 1);
+                    }, 4500);
+                };
+
+                const stopAutoplay = () => {
+                    if (autoplayId) {
+                        clearInterval(autoplayId);
+                        autoplayId = null;
+                    }
+                };
+
+                if (prevButton) {
+                    prevButton.addEventListener('click', () => {
+                        goToSlide(currentIndex - 1);
+                        startAutoplay();
+                    });
+                }
+
+                if (nextButton) {
+                    nextButton.addEventListener('click', () => {
+                        goToSlide(currentIndex + 1);
+                        startAutoplay();
+                    });
+                }
+
+                dots.forEach((dot) => {
+                    dot.addEventListener('click', () => {
+                        const targetIndex = Number(dot.getAttribute('data-index'));
+                        if (Number.isInteger(targetIndex)) {
+                            goToSlide(targetIndex);
+                            startAutoplay();
+                        }
+                    });
+                });
+
+                carousel.addEventListener('mouseenter', stopAutoplay);
+                carousel.addEventListener('mouseleave', startAutoplay);
+                carousel.addEventListener('focusin', stopAutoplay);
+                carousel.addEventListener('focusout', startAutoplay);
+
+                renderSlide(currentIndex);
+                startAutoplay();
             });
             // Scroll suave para todos os links internos
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
